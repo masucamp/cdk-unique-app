@@ -1,0 +1,24 @@
+type Measurement {
+  id: ID!
+  sensorId: String!
+  value: Float!
+  timestamp: String!
+}
+
+input MeasurementInput {
+  sensorId: String!
+  value: Float!
+}
+
+type Query {
+  getMeasurements(sensorId: String!): [Measurement]
+}
+
+type Mutation {
+  addMeasurement(input: MeasurementInput!): Measurement
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}
