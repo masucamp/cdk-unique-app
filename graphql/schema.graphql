@@ -1,0 +1,43 @@
+type Entity {
+  id: ID!
+  text: String!
+  type: String!
+  score: Float!
+}
+
+type Sentiment {
+  positive: Float!
+  negative: Float!
+  neutral: Float!
+  mixed: Float!
+  overall: String!
+}
+
+type AnalysisResult {
+  id: ID!
+  text: String!
+  entities: [Entity!]!
+  sentiment: Sentiment!
+  timestamp: String!
+}
+
+type Recommendation {
+  id: ID!
+  text: String!
+  score: Float!
+  reason: String!
+}
+
+type Query {
+  getAnalysisResult(id: ID!): AnalysisResult
+  getRecommendations(entityType: String!, limit: Int): [Recommendation!]!
+}
+
+type Mutation {
+  analyzeText(text: String!): AnalysisResult!
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}

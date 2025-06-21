@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Recommendation System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/aws-amplify@4.3.14/dist/aws-amplify.min.js"></script>
+    <style>
+        body {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+        .entity-badge {
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+        .sentiment-bar {
+            height: 20px;
+            margin-bottom: 10px;
+        }
+        .card {
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Content Recommendation System</h1>
+        <p class="lead">This application uses AWS Comprehend for text analysis, AWS Neptune for graph storage, and AWS AppSync for GraphQL API.</p>
+        
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Text Analysis</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="analysisForm">
+                            <div class="mb-3">
+                                <label for="textInput" class="form-label">Enter text to analyze:</label>
+                                <textarea class="form-control" id="textInput" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Analyze Text</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mb-4" id="analysisResultSection" style="display: none;">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Analysis Results</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6>Entities:</h6>
+                        <div id="entitiesContainer" class="mb-3"></div>
+                        
+                        <h6>Sentiment:</h6>
+                        <div class="mb-3">
+                            <div class="progress">
+                                <div id="positiveBar" class="progress-bar bg-success" role="progressbar"></div>
+                                <div id="neutralBar" class="progress-bar bg-secondary" role="progressbar"></div>
+                                <div id="negativeBar" class="progress-bar bg-danger" role="progressbar"></div>
+                                <div id="mixedBar" class="progress-bar bg-warning" role="progressbar"></div>
+                            </div>
+                            <div class="mt-2">
+                                <small>
+                                    <span class="badge bg-success">Positive</span>
+                                    <span class="badge bg-secondary">Neutral</span>
+                                    <span class="badge bg-danger">Negative</span>
+                                    <span class="badge bg-warning">Mixed</span>
+                                </small>
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-info">
+                            <strong>Overall Sentiment:</strong> <span id="overallSentiment"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mb-4" id="recommendationsSection" style="display: none;">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Recommendations</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="entityTypeSelect" class="form-label">Get recommendations based on entity type:</label>
+                            <select class="form-select" id="entityTypeSelect">
+                                <option value="PERSON">Person</option>
+                                <option value="LOCATION">Location</option>
+                                <option value="ORGANIZATION">Organization</option>
+                                <option value="COMMERCIAL_ITEM">Commercial Item</option>
+                                <option value="EVENT">Event</option>
+                                <option value="DATE">Date</option>
+                                <option value="QUANTITY">Quantity</option>
+                                <option value="TITLE">Title</option>
+                            </select>
+                        </div>
+                        <button id="getRecommendationsBtn" class="btn btn-primary">Get Recommendations</button>
+                        
+                        <div id="recommendationsContainer" class="mt-4"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Configuration - Replace with actual values from CDK output
+        const API_URL = 'API_URL_PLACEHOLDER';
+        const API_KEY = 'API_KEY_PLACEHOLDER';
+        
+        // Initialize Amplify
+        const configureAmplify = () => {
+            AWS.config.region = 'us-east-1'; // Replace with your region
+            
+            Amplify.configure({
+                API: {
+                    graphql_endpoint: API_URL,
+                    graphql_headers: () => ({
+                        'x-api-key': API_KEY
+                    })
+                }
+            });
+        };
+        
+        // Analyze text
+        const analyzeText = async (text) => {
+            const query = `
+                mutation AnalyzeText($text: String!) {
+                    analyzeText(text: $text) {
+                        id
+                        text
+                        entities {
+                            id
+                            text
+                            type
+                            score
+                        }
+                        sentiment {
+                            positive
+                            negative
+                            neutral
+                            mixed
+                            overall
+                        }
+                        timestamp
+                    }
+                }
+            `;
+            
+            try {
+                const response = await Amplify.API.graphql({
+                    query,
+                    variables: { text }
+                });
+                
+                return response.data.analyzeText;
+            } catch (error) {
+                console.error('Error analyzing text:', error);
+                throw error;
+            }
+        };
+        
+        // Get recommendations
+        const getRecommendations = async (entityType, limit = 5) => {
+            const query = `
+                query GetRecommendations($entityType: String!, $limit: Int) {
+                    getRecommendations(entityType: $entityType, limit: $limit) {
+                        id
+                        text
+                        score
+                        reason
+                    }
+                }
+            `;
+            
+            try {
+                const response = await Amplify.API.graphql({
+                    query,
+                    variables: { entityType, limit }
+                });
+                
+                return response.data.getRecommendations;
+            } catch (error) {
+                console.error('Error getting recommendations:', error);
+                throw error;
+            }
+        };
+        
+        // Display analysis results
+        const displayAnalysisResults = (result) => {
+            // Display entities
+            const entitiesContainer = document.getElementById('entitiesContainer');
+            entitiesContainer.innerHTML = '';
+            
+            if (result.entities.length === 0) {
+                entitiesContainer.innerHTML = '<p>No entities found.</p>';
+            } else {
+                result.entities.forEach(entity => {
+                    const badge = document.createElement('span');
+                    badge.className = `badge entity-badge bg-primary`;
+                    badge.textContent = `${entity.text} (${entity.type})`;
+                    badge.title = `Confidence: ${(entity.score * 100).toFixed(1)}%`;
+                    entitiesContainer.appendChild(badge);
+                });
+            }
+            
+            // Display sentiment
+            const sentiment = result.sentiment;
+            document.getElementById('positiveBar').style.width = `${sentiment.positive * 100}%`;
+            document.getElementById('neutralBar').style.width = `${sentiment.neutral * 100}%`;
+            document.getElementById('negativeBar').style.width = `${sentiment.negative * 100}%`;
+            document.getElementById('mixedBar').style.width = `${sentiment.mixed * 100}%`;
+            
+            document.getElementById('overallSentiment').textContent = sentiment.overall;
+            
+            // Show results section
+            document.getElementById('analysisResultSection').style.display = 'block';
+            document.getElementById('recommendationsSection').style.display = 'block';
+        };
+        
+        // Display recommendations
+        const displayRecommendations = (recommendations) => {
+            const container = document.getElementById('recommendationsContainer');
+            container.innerHTML = '';
+            
+            if (recommendations.length === 0) {
+                container.innerHTML = '<p>No recommendations found.</p>';
+                return;
+            }
+            
+            const list = document.createElement('ul');
+            list.className = 'list-group';
+            
+            recommendations.forEach(rec => {
+                const item = document.createElement('li');
+                item.className = 'list-group-item';
+                
+                const text = document.createElement('div');
+                text.className = 'fw-bold';
+                text.textContent = rec.text.length > 100 ? rec.text.substring(0, 100) + '...' : rec.text;
+                
+                const reason = document.createElement('div');
+                reason.className = 'small text-muted';
+                reason.textContent = `${rec.reason} (Score: ${rec.score.toFixed(2)})`;
+                
+                item.appendChild(text);
+                item.appendChild(reason);
+                list.appendChild(item);
+            });
+            
+            container.appendChild(list);
+        };
+        
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            configureAmplify();
+            
+            // Form submission
+            document.getElementById('analysisForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const text = document.getElementById('textInput').value.trim();
+                if (!text) return;
+                
+                try {
+                    const result = await analyzeText(text);
+                    displayAnalysisResults(result);
+                } catch (error) {
+                    alert('Error analyzing text. Please try again.');
+                }
+            });
+            
+            // Get recommendations
+            document.getElementById('getRecommendationsBtn').addEventListener('click', async () => {
+                const entityType = document.getElementById('entityTypeSelect').value;
+                
+                try {
+                    const recommendations = await getRecommendations(entityType);
+                    displayRecommendations(recommendations);
+                } catch (error) {
+                    alert('Error getting recommendations. Please try again.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

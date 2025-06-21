@@ -1,0 +1,11 @@
+{
+  "name": "text-analysis-lambda",
+  "version": "1.0.0",
+  "description": "Lambda function for text analysis using AWS Comprehend and Neptune",
+  "main": "index.js",
+  "dependencies": {
+    "aws-sdk": "^2.1030.0",
+    "gremlin": "^3.5.1",
+    "uuid": "^8.3.2"
+  }
+}
