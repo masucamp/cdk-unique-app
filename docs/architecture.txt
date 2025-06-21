@@ -1,0 +1,16 @@
++----------------+     +-------------------+     +------------------------+
+|                |     |                   |     |                        |
+| S3 Input       |     | Step Functions    |     | Lambda +               |
+| Bucket         +---->+ Workflow          +---->+ Comprehend Medical     |
+| (Text Files)   |     | (Orchestration)   |     | (Medical Text Analysis)|
+|                |     |                   |     |                        |
++----------------+     +-------------------+     +------------------------+
+                                                            |
+                                                            v
+                       +----------------+     +------------------------+
+                       |                |     |                        |
+                       | S3 Output      |     | Lambda +               |
+                       | Bucket         +<----+ Polly                  |
+                       | (Audio Files)  |     | (Text-to-Speech)       |
+                       |                |     |                        |
+                       +----------------+     +------------------------+

@@ -1,0 +1,44 @@
+Patient Name: John Doe
+Date of Visit: June 15, 2023
+Age: 45
+Gender: Male
+
+Chief Complaint:
+Patient presents with persistent cough for 2 weeks, accompanied by chest pain and shortness of breath.
+
+Medical History:
+- Hypertension (diagnosed 5 years ago)
+- Type 2 Diabetes (diagnosed 3 years ago)
+- Appendectomy (10 years ago)
+
+Current Medications:
+- Lisinopril 10mg daily for hypertension
+- Metformin 500mg twice daily for diabetes
+- Aspirin 81mg daily
+
+Allergies:
+- Penicillin (hives)
+- Shellfish (anaphylaxis)
+
+Physical Examination:
+- Blood Pressure: 145/90 mmHg
+- Heart Rate: 88 bpm
+- Respiratory Rate: 20 breaths/min
+- Temperature: 38.2°C
+- Oxygen Saturation: 94% on room air
+
+Lungs: Crackles in the right lower lobe, decreased breath sounds.
+Heart: Regular rate and rhythm, no murmurs.
+Abdomen: Soft, non-tender, non-distended.
+
+Assessment:
+1. Community-acquired pneumonia, right lower lobe
+2. Uncontrolled hypertension
+3. Type 2 diabetes, well-controlled
+
+Plan:
+1. Azithromycin 500mg on day 1, then 250mg daily for 4 days
+2. Chest X-ray to confirm pneumonia diagnosis
+3. Increase Lisinopril to 20mg daily
+4. Follow-up in 1 week
+5. If symptoms worsen, return to clinic immediately or go to emergency department
