@@ -1,0 +1,58 @@
+type Query {
+  # Location Service queries
+  searchPlaces(searchText: String!): [Place]
+  getPlace(placeId: String!): Place
+  
+  # Timestream queries
+  getUserInteractions(userId: ID!, limit: Int): [Interaction]
+}
+
+type Mutation {
+  # Polly text-to-speech
+  synthesizeSpeech(text: String!, voiceId: String): SpeechOutput
+  
+  # Timestream record interaction
+  recordInteraction(input: InteractionInput!): Interaction
+}
+
+# Location types
+type Place {
+  placeId: ID!
+  label: String!
+  address: String
+  position: [Float]
+  country: String
+  region: String
+  municipality: String
+  neighborhood: String
+  postalCode: String
+}
+
+# Polly types
+type SpeechOutput {
+  audioContent: String!
+  format: String!
+}
+
+# Timestream types
+type Interaction {
+  id: ID!
+  userId: ID!
+  interactionType: String!
+  locationId: String
+  timestamp: String!
+  details: AWSJSON
+}
+
+input InteractionInput {
+  userId: ID!
+  interactionType: String!
+  locationId: String
+  details: AWSJSON
+}
+
+# Schema directives
+directive @aws_auth(cognito_groups: [String!]) on FIELD_DEFINITION
+directive @aws_api_key on FIELD_DEFINITION
+directive @aws_iam on FIELD_DEFINITION
+directive @aws_cognito_user_pools on FIELD_DEFINITION
