@@ -1,0 +1,72 @@
+type Query {
+  getSentimentHistory(timeRange: TimeRangeInput!): [SentimentRecord!]!
+}
+
+type Mutation {
+  convertTextToSpeech(input: TextToSpeechInput!): TextToSpeechOutput!
+  analyzeSentiment(input: SentimentAnalysisInput!): SentimentAnalysisOutput!
+  storeSentimentData(input: StoreSentimentInput!): StoreSentimentOutput!
+}
+
+input TextToSpeechInput {
+  text: String!
+  voiceId: String
+  outputFormat: String
+}
+
+type TextToSpeechOutput {
+  audioUrl: String!
+  requestId: String!
+}
+
+input SentimentAnalysisInput {
+  text: String!
+  languageCode: String
+}
+
+type SentimentAnalysisOutput {
+  sentiment: String!
+  sentimentScores: SentimentScores!
+  requestId: String!
+}
+
+type SentimentScores {
+  positive: Float!
+  negative: Float!
+  neutral: Float!
+  mixed: Float!
+}
+
+input StoreSentimentInput {
+  text: String!
+  sentiment: String!
+  sentimentScores: SentimentScoresInput!
+  timestamp: AWSDateTime
+}
+
+input SentimentScoresInput {
+  positive: Float!
+  negative: Float!
+  neutral: Float!
+  mixed: Float!
+}
+
+type StoreSentimentOutput {
+  success: Boolean!
+  recordId: String!
+}
+
+input TimeRangeInput {
+  startTime: AWSDateTime!
+  endTime: AWSDateTime!
+}
+
+type SentimentRecord {
+  recordId: String!
+  text: String!
+  sentiment: String!
+  sentimentScores: SentimentScores!
+  timestamp: AWSDateTime!
+}
+
+scalar AWSDateTime

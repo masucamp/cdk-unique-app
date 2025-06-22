@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with draw.io -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="800px" height="600px" viewBox="-0.5 -0.5 800 600">
+  <defs/>
+  <g>
+    <!-- React Frontend -->
+    <rect x="50" y="50" width="120" height="60" rx="9" ry="9" fill="#FF9900" stroke="#000000" pointer-events="all"/>
+    <g transform="translate(-0.5 -0.5)">
+      <switch>
+        <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+          <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 80px; margin-left: 51px;">
+            <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+              <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">React Frontend</div>
+            </div>
+          </div>
+        </foreignObject>
+      </switch>
+    </g>
+    
+    <!-- AWS AppSync -->
+    <rect x="300" y="50" width="120" height="60" rx="9" ry="9" fill="#7AA116" stroke="#000000" pointer-events="all"/>
+    <g transform="translate(-0.5 -0.5)">
+      <switch>
+        <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+          <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 80px; margin-left: 301px;">
+            <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+              <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">AWS AppSync</div>
+            </div>
+          </div>
+        </foreignObject>
+      </switch>
+    </g>
+    
+    <!-- Lambda Functions -->
+    <rect x="300" y="200" width="120" height="60" rx="9" ry="9" fill="#ED7100" stroke="#000000" pointer-events="all"/>
+    <g transform="translate(-0.5 -0.5)">
+      <switch>
+        <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+          <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 230px; margin-left: 301px;">
+            <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+              <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">Lambda Functions</div>
+            </div>
+          </div>
+        </foreignObject>
+      </switch>
+    </g>
+    
+    <!-- AWS Polly -->
+    <rect x="150" y="350" width="120" height="60" rx="9" ry="9" fill="#277116" stroke="#000000" pointer-events="all"/>
+    <g transform="translate(-0.5 -0.5)">
+      <switch>
+        <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+          <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 380px; margin-left: 151px;">
+            <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+              <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">AWS Polly</div>
+            </div>
+          </div>
+        </foreignObject>
+      </switch>
+    </g>
+    
+    <!-- AWS Comprehend -->
+    <rect x="300" y="350" width="120" height="60" rx="9" ry="9" fill="#3333FF" stroke="#000000" pointer-events="all"/>
+    <g transform="translate(-0.5 -0.5)">
+      <switch>
+        <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+          <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 380px; margin-left: 301px;">
+            <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+              <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">AWS Comprehend</div>
+            </div>
+          </div>
+        </foreignObject>
+      </switch>
+    </g>
+    
+    <!-- AWS Timestream -->
+    <rect x="450" y="350" width="120" height="60" rx="9" ry="9" fill="#9900CC" stroke="#000000" pointer-events="all"/>
+    <g transform="translate(-0.5 -0.5)">
+      <switch>
+        <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+          <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 380px; margin-left: 451px;">
+            <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+              <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">AWS Timestream</div>
+            </div>
+          </div>
+        </foreignObject>
+      </switch>
+    </g>
+    
+    <!-- Connections -->
+    <!-- React to AppSync -->
+    <path d="M 170 80 L 300 80" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="stroke"/>
+    <path d="M 175 75 L 175 85" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="all"/>
+    <path d="M 295 75 L 295 85" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="all"/>
+    
+    <!-- AppSync to Lambda -->
+    <path d="M 360 110 L 360 200" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="stroke"/>
+    <path d="M 355 115 L 365 115" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="all"/>
+    <path d="M 355 195 L 365 195" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="all"/>
+    
+    <!-- Lambda to Polly -->
+    <path d="M 300 230 L 210 350" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="stroke"/>
+    <path d="M 295 235 L 305 225" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="all"/>
+    <path d="M 215 345 L 205 355" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="all"/>
+    
+    <!-- Lambda to Comprehend -->
+    <path d="M 360 260 L 360 350" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="stroke"/>
+    <path d="M 355 265 L 365 265" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="all"/>
+    <path d="M 355 345 L 365 345" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="all"/>
+    
+    <!-- Lambda to Timestream -->
+    <path d="M 420 230 L 510 350" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="stroke"/>
+    <path d="M 425 235 L 415 225" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="all"/>
+    <path d="M 505 345 L 515 355" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="all"/>
+    
+    <!-- Title -->
+    <rect x="250" y="10" width="220" height="30" fill="none" stroke="none" pointer-events="all"/>
+    <g transform="translate(-0.5 -0.5)">
+      <switch>
+        <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+          <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 218px; height: 1px; padding-top: 25px; margin-left: 251px;">
+            <div data-drawio-colors="color: #000000; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+              <div style="display: inline-block; font-size: 16px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; font-weight: bold; white-space: normal; overflow-wrap: normal;">VoiceSentinel Architecture</div>
+            </div>
+          </div>
+        </foreignObject>
+      </switch>
+    </g>
+  </g>
+</svg>
