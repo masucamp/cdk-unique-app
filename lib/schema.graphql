@@ -1,0 +1,59 @@
+type JournalEntry {
+  id: ID!
+  userId: String!
+  title: String!
+  content: String!
+  location: Location
+  sentiment: Sentiment
+  audioUrl: String
+  createdAt: String!
+  updatedAt: String
+}
+
+type Location {
+  latitude: Float!
+  longitude: Float!
+  placeName: String
+}
+
+type Sentiment {
+  sentiment: String!
+  positive: Float!
+  negative: Float!
+  neutral: Float!
+  mixed: Float!
+}
+
+input LocationInput {
+  latitude: Float!
+  longitude: Float!
+  placeName: String
+}
+
+input JournalEntryInput {
+  userId: String!
+  title: String!
+  content: String!
+  location: LocationInput
+}
+
+type Query {
+  getJournalEntry(id: ID!): JournalEntry
+  listJournalEntries: [JournalEntry]
+  listJournalEntriesByUser(userId: String!): [JournalEntry]
+}
+
+type Mutation {
+  createJournalEntry(input: JournalEntryInput!): JournalEntry
+  analyzeSentiment(journalEntryId: ID!): JournalEntry
+  convertToSpeech(journalEntryId: ID!): JournalEntry
+}
+
+type Subscription {
+  onCreateJournalEntry: JournalEntry
+    @aws_subscribe(mutations: ["createJournalEntry"])
+  onAnalyzeSentiment: JournalEntry
+    @aws_subscribe(mutations: ["analyzeSentiment"])
+  onConvertToSpeech: JournalEntry
+    @aws_subscribe(mutations: ["convertToSpeech"])
+}
