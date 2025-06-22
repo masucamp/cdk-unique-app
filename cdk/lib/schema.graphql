@@ -1,0 +1,46 @@
+type Device {
+  deviceId: ID!
+  name: String!
+  type: String!
+}
+
+type Location {
+  latitude: Float!
+  longitude: Float!
+  timestamp: AWSDateTime!
+  accuracy: Float
+  speed: Float
+  heading: Float
+}
+
+type DeviceLocation {
+  device: Device!
+  location: Location!
+}
+
+type DeviceHistory {
+  deviceId: ID!
+  locations: [Location!]!
+  startTime: AWSDateTime!
+  endTime: AWSDateTime!
+}
+
+type Query {
+  getDeviceLocations(limit: Int): [DeviceLocation!]!
+  getDeviceHistory(deviceId: ID!, startTime: AWSDateTime!, endTime: AWSDateTime!): DeviceHistory!
+}
+
+type Subscription {
+  onLocationUpdate(deviceId: ID): DeviceLocation
+    @aws_subscribe(mutations: ["updateDeviceLocation"])
+}
+
+type Mutation {
+  updateDeviceLocation(deviceId: ID!, latitude: Float!, longitude: Float!, timestamp: AWSDateTime!, accuracy: Float, speed: Float, heading: Float): DeviceLocation!
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
