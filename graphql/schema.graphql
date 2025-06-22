@@ -1,0 +1,83 @@
+type HikingData {
+  id: ID!
+  userId: String!
+  timestamp: AWSDateTime!
+  latitude: Float!
+  longitude: Float!
+  elevation: Float
+  speed: Float
+  heartRate: Int
+  trailId: String
+  trailName: String
+}
+
+type Route {
+  legs: [RouteLeg]
+  summary: RouteSummary
+}
+
+type RouteLeg {
+  distance: Float!
+  duration: Float!
+  startPosition: [Float]!
+  endPosition: [Float]!
+  steps: [RouteStep]
+}
+
+type RouteStep {
+  distance: Float!
+  duration: Float!
+  startPosition: [Float]!
+  endPosition: [Float]!
+  instruction: String!
+}
+
+type RouteSummary {
+  distance: Float!
+  duration: Float!
+}
+
+type VoiceInstruction {
+  url: String!
+  instruction: String!
+}
+
+type Place {
+  id: String!
+  name: String!
+  address: String
+  coordinates: [Float]!
+}
+
+type Query {
+  getHikingData(id: ID!): HikingData
+  listHikingData(userId: String!, startTime: AWSDateTime, endTime: AWSDateTime): [HikingData]
+  getRoute(startLat: Float!, startLng: Float!, endLat: Float!, endLng: Float!): Route
+  getVoiceInstructions(instruction: String!, voiceId: String): VoiceInstruction
+  searchPlaces(query: String!, position: [Float]): [Place]
+}
+
+type Mutation {
+  createHikingData(
+    userId: String!
+    timestamp: AWSDateTime!
+    latitude: Float!
+    longitude: Float!
+    elevation: Float
+    speed: Float
+    heartRate: Int
+    trailId: String
+    trailName: String
+  ): HikingData
+}
+
+type Subscription {
+  onCreateHikingData(userId: String!): HikingData
+    @aws_subscribe(mutations: ["createHikingData"])
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}

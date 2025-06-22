@@ -1,0 +1,32 @@
+```
++------------------+     +------------------+
+|                  |     |                  |
+|  React Frontend  |<--->|  AWS Amplify     |
+|                  |     |  Hosting         |
++--------+---------+     +------------------+
+         |
+         v
++------------------+     +------------------+
+|                  |     |                  |
+|  AWS Cognito     |<--->|  User            |
+|  Authentication  |     |  Management      |
++--------+---------+     +------------------+
+         |
+         v
++------------------+
+|                  |
+|  AWS AppSync     |
+|  GraphQL API     |
+|                  |
++--------+---------+
+         |
+         v
++--------+---------+     +------------------+     +------------------+
+|                  |     |                  |     |                  |
+|  AWS Location    |     |  AWS Polly       |     |  AWS Timestream  |
+|  Service         |     |  Text-to-Speech  |     |  Time Series DB  |
+|                  |     |                  |     |                  |
++------------------+     +------------------+     +------------------+
+
+VoiceTrail Architecture - Using AWS Location Service, AWS Polly, AWS Timestream, and AWS AppSync
+```
