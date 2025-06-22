@@ -1,0 +1,10 @@
+{
+  "name": "text-processing",
+  "version": "1.0.0",
+  "description": "Lambda function for processing text with AWS Polly and Comprehend",
+  "main": "index.js",
+  "dependencies": {
+    "aws-sdk": "^2.1413.0",
+    "uuid": "^9.0.0"
+  }
+}

@@ -1,0 +1,29 @@
+type Query {
+  getAnalysisResults(startTime: String!, endTime: String!): [AnalysisResult]
+}
+
+type Mutation {
+  processText(text: String!): AnalysisResult
+}
+
+type AnalysisResult {
+  id: ID!
+  text: String!
+  sentiment: Sentiment!
+  keyPhrases: [String]
+  audioUrl: String
+  timestamp: String!
+}
+
+type Sentiment {
+  sentiment: String!
+  positive: Float!
+  negative: Float!
+  neutral: Float!
+  mixed: Float!
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}
