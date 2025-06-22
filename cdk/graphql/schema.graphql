@@ -1,0 +1,101 @@
+type Query {
+  # Get the current location of the user
+  getCurrentLocation(deviceId: ID!): Location
+  
+  # Get location history for a specific time range
+  getLocationHistory(
+    deviceId: ID!
+    startTime: AWSDateTime!
+    endTime: AWSDateTime!
+  ): [Location]
+  
+  # Get all geofences for the user
+  getGeofences: [Geofence]
+  
+  # Get a specific geofence
+  getGeofence(geofenceId: ID!): Geofence
+}
+
+type Mutation {
+  # Track a new location
+  trackLocation(
+    deviceId: ID!
+    latitude: Float!
+    longitude: Float!
+    accuracy: Float
+    heading: Float
+    speed: Float
+  ): Location
+  
+  # Create a new geofence
+  createGeofence(
+    geofenceName: String!
+    latitude: Float!
+    longitude: Float!
+    radius: Float!
+    notificationMessage: String
+  ): Geofence
+  
+  # Delete a geofence
+  deleteGeofence(geofenceId: ID!): Boolean
+  
+  # Synthesize speech from text
+  synthesizeSpeech(
+    text: String!
+    voiceId: String
+    outputFormat: String
+  ): SpeechOutput
+}
+
+type Subscription {
+  # Subscribe to location updates for a specific device
+  onLocationUpdate(deviceId: ID!): Location
+    @aws_subscribe(mutations: ["trackLocation"])
+  
+  # Subscribe to geofence events
+  onGeofenceEvent(deviceId: ID!): GeofenceEvent
+    @aws_subscribe(mutations: ["trackLocation"])
+}
+
+type Location {
+  deviceId: ID!
+  latitude: Float!
+  longitude: Float!
+  timestamp: AWSDateTime!
+  accuracy: Float
+  heading: Float
+  speed: Float
+}
+
+type Geofence {
+  geofenceId: ID!
+  geofenceName: String!
+  latitude: Float!
+  longitude: Float!
+  radius: Float!
+  notificationMessage: String
+  createdAt: AWSDateTime!
+}
+
+type GeofenceEvent {
+  deviceId: ID!
+  geofenceId: ID!
+  eventType: GeofenceEventType!
+  timestamp: AWSDateTime!
+}
+
+enum GeofenceEventType {
+  ENTER
+  EXIT
+}
+
+type SpeechOutput {
+  audioUrl: String!
+  taskId: String
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
